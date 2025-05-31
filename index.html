@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Time Capsule | Until May 31, 2027</title>
+    <style>
+        :root {
+            --primary: #ff8fa3;
+            --secondary: #ffb3c1;
+            --accent: #ff5c8a;
+            --background: #fff5f7;
+            --text: #4a4a4a;
+            --shadow: rgba(255, 140, 163, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: var(--primary);
+            opacity: 0.6;
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(-10px) translateX(20px);
+            }
+            75% {
+                transform: translateY(-30px) translateX(-10px);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .countdown-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px var(--shadow);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-container::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background-color: var(--secondary);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .countdown-container::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+
+        .countdown-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-items: center;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 100px;
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            background-color: var(--background);
+            border-radius: 10px;
+            padding: 0.5rem;
+            width: 100%;
+            box-shadow: 0 4px 8px var(--shadow);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+        }
+
+        .countdown-value:hover {
+            transform: translateY(-5px);
+        }
+
+        .countdown-label {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .affirmation-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            position: relative;
+            overflow: hidden;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .affirmation-text {
+            font-size: 1.2rem;
+            text-align: center;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.5s ease;
+            line-height: 1.6;
+            max-width: 100%;
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .heart-decoration {
+            position: absolute;
+            opacity: 0.1;
+            color: var(--primary);
+            font-size: 3rem;
+            z-index: 0;
+        }
+
+        .heart-1 {
+            top: 10px;
+            left: 10px;
+            transform: rotate(-20deg);
+        }
+
+        .heart-2 {
+            bottom: 10px;
+            right: 10px;
+            transform: rotate(15deg);
+        }
+
+        .upload-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .upload-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        input, textarea {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        input:focus, textarea:focus {
+            outline: 2px solid var(--primary);
+            border-color: var(--primary);
+        }
+
+        .upload-btn {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--shadow);
+        }
+
+        .upload-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .upload-btn-icon {
+            font-size: 1.2rem;
+        }
+
+        .upload-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 1rem;
+        }
+
+        .upload-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .upload-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        .submit-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff4579;
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .notifications-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-top: 1.5rem;
+        }
+
+        .notifications-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notifications-list {
+            max-height: 200px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .notification-item {
+            background-color: var(--background);
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            animation: fadeIn 0.5s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .notification-icon {
+            color: var(--accent);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .notification-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .notification-time {
+            font-size: 0.8rem;
+            color: #888;
+            flex-shrink: 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 1rem;
+            color: var(--accent);
+        }
+
+        .error {
+            background-color: #ffe6e6;
+            color: #d63031;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .success {
+            background-color: #e6ffe6;
+            color: #00b894;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        /* Time Capsule Opened View */
+        .capsule-opened {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .capsule-opened.active {
+            display: block;
+        }
+
+        .capsule-opened h2 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .file-item {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .file-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .file-preview {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .file-info {
+            text-align: left;
+        }
+
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        .file-uploader {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .file-date {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart-beat {
+            display: inline-block;
+            animation: heartBeat 1.5s infinite;
+            transform-origin: center;
+        }
+
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1);
+            }
+            14% {
+                transform: scale(1.3);
+            }
+            28% {
+                transform: scale(1);
+            }
+            42% {
+                transform: scale(1.3);
+            }
+            70% {
+                transform: scale(1);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary);
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .footer-heart {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+                min-height: 70px;
+            }
+            
+            .countdown-label {
+                font-size: 0.8rem;
+            }
+            
+            .upload-btn {
+                bottom: 1rem;
+                left: 1rem;
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .upload-btn-text {
+                display: none;
+            }
+            
+            .affirmation-container {
+                padding: 1.5rem;
+                min-height: 100px;
+            }
+            
+            .affirmation-text {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            
+            .heart-decoration {
+                font-size: 2rem;
+            }
+            
+            .files-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .countdown-container {
+                padding: 1.5rem;
+            }
+            
+            .countdown-value {
+                font-size: 1.5rem;
+                min-height: 60px;
+                padding: 0.3rem;
+            }
+            
+            .countdown-title {
+                font-size: 1.2rem;
+            }
+            
+            .affirmation-text {
+                font-size: 0.9rem;
+            }
+            
+            .upload-btn {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .upload-btn-icon {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .countdown {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+            
+            .countdown-value {
+                font-size: 1.2rem;
+                min-height: 50px;
+            }
+            
+            .upload-btn {
+                bottom: 0.5rem;
+                left: 0.5rem;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <!-- Main Time Capsule View -->
+    <div id="main-view">
+        <header>
+            <h1>Our Time Capsule</h1>
+            <p class="subtitle">A journey of growth until we reunite</p>
+        </header>
+        
+        <div class="container">
+            <div class="countdown-container">
+                <h2 class="countdown-title">Time Until We Open Our Capsule</h2>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">--</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">--</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">--</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">--</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="affirmation-container">
+                <div class="heart-decoration heart-1">❤</div>
+                <p class="affirmation-text" id="affirmation">Loading a message for you...</p>
+                <div class="heart-decoration heart-2">❤</div>
+            </div>
+            
+            <div class="upload-container">
+                <div class="notifications-container">
+                    <h3 class="notifications-title">
+                        <span class="notification-icon">📬</span>
+                        Recent Additions to Our Capsule
+                    </h3>
+                    <div class="notifications-list" id="notifications-list">
+                        <div class="loading">Loading notifications...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Created with <span class="heart-beat">❤️</span> until May 31, 2027</p>
+        </footer>
+    </div>
+
+    <!-- Time Capsule Opened View -->
+    <div id="capsule-opened" class="capsule-opened">
+        <header>
+            <h1>🎉 Our Time Capsule is Open! 🎉</h1>
+            <p class="subtitle">All our memories from our journey together</p>
+        </header>
+        
+        <div class="container">
+            <h2>Our Shared Memories</h2>
+            <div class="files-grid" id="files-grid">
+                <div class="loading">Loading your memories...</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Our journey together <span class="heart-beat">❤️</span> Forever and always</p>
+        </footer>
+    </div>
+    
+    <button class="upload-btn" id="upload-btn">
+        <span class="upload-btn-icon">❤️</span>
+        <span class="upload-btn-text">Upload to Time Capsule</span>
+    </button>
+    
+    <div class="upload-modal" id="upload-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add to Our Time Capsule</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <form class="upload-form" id="upload-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message (Optional)</label>
+                    <textarea id="message" name="message" rows="3" placeholder="Add a message with your upload"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="file">Choose File</label>
+                    <input type="file" id="file" name="file" required accept="image/*,video/*,.txt,.pdf,.doc,.docx">
+                </div>
+                <button type="submit" class="submit-btn" id="submit-btn">Add to Time Capsule</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBGspaml7prsSb-KDhuvW7lOPprEOsh4c0",
+            authDomain: "time-capsule-54a40.firebaseapp.com",
+            projectId: "time-capsule-54a40",
+            storageBucket: "time-capsule-54a40.firebasestorage.app",
+            messagingSenderId: "578912441596",
+            appId: "1:578912441596:web:d95c219bacaad8bc243379",
+            measurementId: "G-7ZN64P9313"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // Global variables
+        window.db = db;
+        window.storage = storage;
+        window.addDoc = addDoc;
+        window.collection = collection;
+        window.onSnapshot = onSnapshot;
+        window.query = query;
+        window.orderBy = orderBy;
+        window.ref = ref;
+        window.uploadBytes = uploadBytes;
+        window.getDownloadURL = getDownloadURL;
+    </script>
+
+    <script>
+        // Create floating particles (hearts)
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 8 : 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 10px and 30px
+                const size = Math.random() * 20 + 10;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // Shape (heart or circle)
+                if (Math.random() > 0.5) {
+                    particle.innerHTML = '❤';
+                    particle.style.fontSize = `${size}px`;
+                    particle.style.display = 'flex';
+                    particle.style.justifyContent = 'center';
+                    particle.style.alignItems = 'center';
+                    particle.style.color = 'var(--primary)';
+                    particle.style.opacity = '0.4';
+                    particle.style.background = 'none';
+                }
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Countdown timer
+        function updateCountdown() {
+            const targetDate = new Date('May 31, 2027 00:00:00').getTime();
+            const now = new Date().getTime();
+            const timeRemaining = targetDate - now;
+            
+            if (timeRemaining <= 0) {
+                // Time capsule is ready to open
+                document.getElementById('main-view').style.display = 'none';
+                document.getElementById('capsule-opened').classList.add('active');
+                document.getElementById('upload-btn').style.display = 'none';
+                loadTimeCapsuleFiles();
+                return;
+            }
+            
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Affirmations rotation
+        function setupAffirmations() {
+            const affirmations = [
+                "Distance means so little when someone means so much.",
+                "The best love is the kind that awakens the soul and makes us reach for more.",
+                "Love is not about how many days, months, or years you have been together. It's about how much you love each other every day.",
+                "True love doesn't mean being inseparable; it means being separated and nothing changes.",
+                "The pain of parting is nothing to the joy of meeting again.",
+                "If you're brave enough to say goodbye, life will reward you with a new hello.",
+                "The most beautiful discovery true friends make is that they can grow separately without growing apart.",
+                "Sometimes you need to be apart from people you love, but that doesn't make you love them any less.",
+                "Growth is painful. Change is painful. But nothing is as painful as staying stuck somewhere you don't belong.",
+                "Every moment of separation is another opportunity to grow stronger for each other.",
+                "The best thing to hold onto in life is each other, even when you need to let go for a while.",
+                "Love knows not distance; it hath no continent; its eyes are for the stars.",
+                "Patience is not the ability to wait, but the ability to keep a good attitude while waiting.",
+                "The most precious gift we can offer anyone is our attention.",
+                "Sometimes, the strongest people are the ones who love beyond all faults, cry behind closed doors, and fight battles nobody knows about.",
+                "The beauty of love is that even in separation, hearts grow fonder.",
+                "Every ending is a new beginning. Trust the journey.",
+                "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+                "The most beautiful things in life are felt with the heart, not seen with the eyes.",
+                "Time apart is a chance for your love to deepen its roots."
+            ];
+            
+            const affirmationElement = document.getElementById('affirmation');
+            let currentIndex = Math.floor(Math.random() * affirmations.length);
+            
+            // Set initial affirmation
+            affirmationElement.textContent = affirmations[currentIndex];
+            
+            // Change affirmation every 10 seconds
+            setInterval(() => {
+                affirmationElement.style.opacity = 0;
+                
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % affirmations.length;
+                    affirmationElement.textContent = affirmations[currentIndex];
+                    affirmationElement.style.opacity = 1;
+                }, 500);
+            }, 10000);
+        }
+        
+        // Upload modal functionality
+        function setupModal() {
+            const uploadBtn = document.getElementById('upload-btn');
+            const uploadModal = document.getElementById('upload-modal');
+            const closeModal = document.getElementById('close-modal');
+            
+            uploadBtn.addEventListener('click', () => {
+                uploadModal.classList.add('active');
+            });
+            
+            closeModal.addEventListener('click', () => {
+                uploadModal.classList.remove('active');
+            });
+            
+            // Close modal when clicking outside
+            uploadModal.addEventListener('click', (e) => {
+                if (e.target === uploadModal) {
+                    uploadModal.classList.remove('active');
+                }
+            });
+        }
+        
+        // Handle file uploads to Firebase Storage
+        async function uploadFileToFirebase(file, fileName) {
+            try {
+                const storageRef = window.ref(window.storage, `time-capsule/${fileName}`);
+                const snapshot = await window.uploadBytes(storageRef, file);
+                const downloadURL = await window.getDownloadURL(snapshot.ref);
+                return downloadURL;
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                throw error;
+            }
+        }
+        
+        // Handle file uploads
+        function setupUploadForm() {
+            const uploadForm = document.getElementById('upload-form');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            uploadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const message = document.getElementById('message').value;
+                const file = document.getElementById('file').files[0];
+                
+                if (!name || !file) {
+                    alert('Please enter your name and select a file.');
+                    return;
+                }
+                
+                // Disable submit button and show loading
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Uploading...';
+                
+                try {
+                    // Generate unique filename
+                    const timestamp = Date.now();
+                    const fileName = `${timestamp}_${file.name}`;
+                    
+                    // Upload file to Firebase Storage
+                    const fileURL = await uploadFileToFirebase(file, fileName);
+                    
+                    // Save metadata to Firestore
+                    const uploadData = {
+                        name: name,
+                        message: message,
+                        fileName: file.name,
+                        fileType: file.type,
+                        fileURL: fileURL,
+                        timestamp: new Date().toISOString(),
+                        uploadedAt: new Date()
+                    };
+                    
+                    await window.addDoc(window.collection(window.db, 'uploads'), uploadData);
+                    
+                    // Reset form and close modal
+                    uploadForm.reset();
+                    document.getElementById('upload-modal').classList.remove('active');
+                    
+                    // Show success message
+                    showMessage('File uploaded successfully!', 'success');
+                    
+                } catch (error) {
+                    console.error('Error uploading:', error);
+                    showMessage('Error uploading file. Please try again.', 'error');
+                } finally {
+                    // Re-enable submit button
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Add to Time Capsule';
+                }
+            });
+        }
+        
+        // Show success/error messages
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type;
+            messageDiv.textContent = message;
+            
+            const container = document.querySelector('.container');
+            container.insertBefore(messageDiv, container.firstChild);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+        
+        // Load and display notifications from Firebase
+        function loadNotifications() {
+            const notificationsList = document.getElementById('notifications-list');
+            
+            try {
+                const q = window.query(
+                    window.collection(window.db, 'uploads'),
+                    window.orderBy('uploadedAt', 'desc')
+                );
+                
+                window.onSnapshot(q, (querySnapshot) => {
+                    notificationsList.innerHTML = '';
+                    
+                    if (querySnapshot.empty) {
+                        notificationsList.innerHTML = '<div class="loading">No uploads yet. Be the first to add something!</div>';
+                        return;
+                    }
+                    
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        addNotificationToList(data);
+                    });
+                });
+            } catch (error) {
+                console.error('Error loading notifications:', error);
+                notificationsList.innerHTML = '<div class="error">Error loading notifications. Please refresh the page.</div>';
+            }
+        }
+        
+        // Add notification to the list
+        function addNotificationToList(data) {
+            const notificationsList = document.getElementById('notifications-list');
+            const notificationItem = document.createElement('div');
+            notificationItem.classList.add('notification-item');
+            
+            // Format timestamp
+            const timestamp = new Date(data.timestamp);
+            const formattedDate = timestamp.toLocaleDateString();
+            const formattedTime = timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            notificationItem.innerHTML = `
+                <span class="notification-icon">💌</span>
+                <div class="notification-content">
+                    <strong>${data.name}</strong> added ${data.fileName} to the time capsule
+                    ${data.message ? `<p>"${data.message}"</p>` : ''}
+                </div>
+                <div class="notification-time">${formattedDate}<br>${formattedTime}</div>
+            `;
+            
+            notificationsList.appendChild(notificationItem);
+        }
+        
+        // Load time capsule files when opened
+        async function loadTimeCapsuleFiles() {
+            const filesGrid = document.getElementById('files-grid');
+            
+            try {
+                const q = window.query(
+                    window.collection(window.db, 'uploads'),
+                    window.orderBy('uploadedAt', 'desc')
+                );
+                
+                window.onSnapshot(q, (querySnapshot) => {
+                    filesGrid.innerHTML = '';
+                    
+                    if (querySnapshot.empty) {
+                        filesGrid.innerHTML = '<div class="loading">No memories found in your time capsule.</div>';
+                        return;
+                    }
+                    
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        createFileItem(data, filesGrid);
+                    });
+                });
+            } catch (error) {
+                console.error('Error loading files:', error);
+                filesGrid.innerHTML = '<div class="error">Error loading your memories. Please refresh the page.</div>';
+            }
+        }
+        
+        // Create file item for display
+        function createFileItem(data, container) {
+            const fileItem = document.createElement('div');
+            fileItem.classList.add('file-item');
+            
+            const timestamp = new Date(data.timestamp);
+            const formattedDate = timestamp.toLocaleDateString();
+            
+            let previewHTML = '';
+            if (data.fileType.startsWith('image/')) {
+                previewHTML = `<img src="${data.fileURL}" alt="${data.fileName}" class="file-preview">`;
+            } else if (data.fileType.startsWith('video/')) {
+                previewHTML = `<video src="${data.fileURL}" class="file-preview" controls></video>`;
+            } else {
+                previewHTML = `<div class="file-preview" style="display: flex; align-items: center; justify-content: center; background-color: var(--background); color: var(--accent); font-size: 3rem;">📄</div>`;
+            }
+            
+            fileItem.innerHTML = `
+                ${previewHTML}
+                <div class="file-info">
+                    <div class="file-name">${data.fileName}</div>
+                    <div class="file-uploader">Uploaded by: ${data.name}</div>
+                    ${data.message ? `<div style="margin: 0.5rem 0; font-style: italic;">"${data.message}"</div>` : ''}
+                    <div class="file-date">${formattedDate}</div>
+                    <a href="${data.fileURL}" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Download</a>
+                </div>
+            `;
+            
+            container.appendChild(fileItem);
+        }
+        
+        // Initialize everything when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            setupAffirmations();
+            setupModal();
+            setupUploadForm();
+            
+            // Wait for Firebase to be ready
+            setTimeout(() => {
+                loadNotifications();
+            }, 1000);
+        });
+        
+        // Handle window resize for particles
+        window.addEventListener('resize', () => {
+            const particlesContainer = document.getElementById('particles');
+            particlesContainer.innerHTML = '';
+            createParticles();
+        });
+    </script>
+</body>
+</html>
